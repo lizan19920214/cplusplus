@@ -1,6 +1,6 @@
 /**
  * 友元类
- * 
+ * g++ -o friend_class friend_class.cpp
 */
 #include <iostream>
 #include <string>

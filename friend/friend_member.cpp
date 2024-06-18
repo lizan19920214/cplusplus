@@ -1,5 +1,6 @@
 /**
  * 成员函数做友元
+ * g++ -o friend_member friend_member.cpp
 */
 #include <iostream>
 #include <string>
