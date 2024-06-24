@@ -3,6 +3,8 @@
 */
 #include <iostream>
 #include <cstring>
+#include <bitset>
+#include <netinet/in.h>
 using namespace std;
 
 //char数组转string，直接赋值
@@ -42,10 +44,40 @@ void string2CharPoint()
     cout << b << endl;
 }
 
+void string2Mask()
+{
+    string str = "c1";
+    const char* msg = str.c_str();
+    int pos = 0;
+
+    //取c的ASCII码转为整数->99
+    cout << msg[pos] << " toint:" << uint64_t(msg[pos]) << endl;
+
+    //转为二进制->0110 0011
+    bitset<8> binary(msg[pos]);
+    string strBinary = binary.to_string();
+    cout << "orBinary: " << strBinary << endl;
+
+    //依次右移
+    for (int i = 0; i < 8; i++)
+    {
+        uint64_t payload_length_ = msg[pos] >> i;
+        bitset<8> binary(payload_length_);
+        string strBinary = binary.to_string();
+        cout <<"to_binary: "<< strBinary << " to_ten: " << payload_length_ << " right:" << i  << endl;
+    }
+    
+    uint16_t length = 0;
+    memcpy(&length, msg + pos, 2);
+    uint64_t payload_length_ = ntohs(length);
+    cout << payload_length_ << endl;
+}
+
 int main()
 {
     char2String();
     string2Char();
     string2CharPoint();
+    string2Mask();
     return 0;
 }
