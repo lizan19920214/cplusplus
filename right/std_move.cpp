@@ -92,7 +92,6 @@ private:
     int* ptr;
 
 };
-
 int main()
 {
     //默认构造
